@@ -12,12 +12,12 @@ func buildLevelGraph(gra *graph.FlowGraph, s, t int) bool {
 		gra.Hig[i] = -1
 	}
 	que := list.New()
-	gra.Hig[0] = 0
+	gra.Hig[s] = 0
 	que.PushBack(s)
 	for que.Len() > 0 {
-		u, _ := que.Front().Value.(int)
+		u := que.Front().Value.(int)
 		que.Remove(que.Front())
-		for i := range gra.Gra[u] {
+		for _, i := range gra.Gra[u] {
 			v, c := gra.Edges[i].To, gra.Edges[i].Cap
 			if c > 0 && gra.Hig[v] == -1 {
 				gra.Hig[v] = gra.Hig[u] + 1
@@ -38,9 +38,7 @@ func findAugmentingPath(gra *graph.FlowGraph, u, t, f int) int {
 	r := f
 	for ; gra.Cur[u] < len(gra.Gra[u]); gra.Cur[u]++ {
 		j := gra.Gra[u][gra.Cur[u]]
-		ed := &gra.Edges[j]
-		v := ed.To
-		c := ed.Cap
+		v, c := gra.Edges[j].To, gra.Edges[j].Cap
 		if c > 0 && gra.Hig[v] == gra.Hig[u]+1 {
 			a := findAugmentingPath(gra, v, t, min(r, c))
 			gra.Edges[j].Cap -= a
