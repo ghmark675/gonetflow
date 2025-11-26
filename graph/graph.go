@@ -5,26 +5,26 @@ type edge struct {
 }
 
 type FlowGraph struct {
-	Nodenum  int
+	NumNodes int
 	Edges    []edge
 	Gra      [][]int
 	Cur, Hig []int
 }
 
-func NewFlowGraph(nodenum int) *FlowGraph {
-	if nodenum < 0 {
+func NewFlowGraph(numNodes int) *FlowGraph {
+	if numNodes < 0 {
 		return nil
 	}
-	adj := make([][]int, nodenum)
+	adj := make([][]int, numNodes)
 	for i := range adj {
 		adj[i] = make([]int, 0)
 	}
 	return &FlowGraph{
-		Nodenum: nodenum,
-		Edges:   make([]edge, 0),
-		Gra:     adj,
-		Cur:     make([]int, nodenum),
-		Hig:     make([]int, nodenum),
+		NumNodes: numNodes,
+		Edges:    make([]edge, 0),
+		Gra:      adj,
+		Cur:      make([]int, numNodes),
+		Hig:      make([]int, numNodes),
 	}
 }
 
