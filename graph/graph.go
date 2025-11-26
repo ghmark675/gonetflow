@@ -1,14 +1,14 @@
 package graph
 
 type edge struct {
-	to, cap int
+	To, Cap int
 }
 
 type Graph struct {
 	Nodenum  int
 	Edges    []edge
-	gra      [][]int
-	cur, hig []int
+	Gra      [][]int
+	Cur, Hig []int
 }
 
 func NewGraph(nodenum int) *Graph {
@@ -22,15 +22,15 @@ func NewGraph(nodenum int) *Graph {
 	return &Graph{
 		Nodenum: nodenum,
 		Edges:   make([]edge, 0),
-		gra:     adj,
-		cur:     make([]int, nodenum),
-		hig:     make([]int, nodenum),
+		Gra:     adj,
+		Cur:     make([]int, nodenum),
+		Hig:     make([]int, nodenum),
 	}
 }
 
 func (graph *Graph) AddEdge(u int, v int, c int) {
-	graph.gra[u] = append(graph.gra[u], len(graph.Edges))
+	graph.Gra[u] = append(graph.Gra[u], len(graph.Edges))
 	graph.Edges = append(graph.Edges, edge{v, c})
-	graph.gra[v] = append(graph.gra[v], len(graph.Edges))
+	graph.Gra[v] = append(graph.Gra[v], len(graph.Edges))
 	graph.Edges = append(graph.Edges, edge{u, 0})
 }
