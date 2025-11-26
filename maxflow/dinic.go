@@ -55,7 +55,9 @@ func findAugmentingPath(gra *graph.FlowGraph, u, t, f int) int {
 func Dinic(gra *graph.FlowGraph, s, t int) int {
 	ans := 0
 	for buildLevelGraph(gra, s, t) {
-		gra.Cur = make([]int, gra.NumNodes)
+		for i := range gra.Cur {
+			gra.Cur[i] = 0
+		}
 		ans += findAugmentingPath(gra, s, t, math.MaxInt)
 	}
 	return ans
