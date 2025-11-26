@@ -1,7 +1,6 @@
 package maxflow
 
 import (
-	"container/list"
 	"math"
 
 	"github.com/ghmark675/gonetflow/graph"
@@ -11,12 +10,12 @@ func buildLevelGraph(gra *graph.FlowGraph, s, t int) bool {
 	for i := range gra.Hig {
 		gra.Hig[i] = -1
 	}
-	que := list.New()
+	que := make([]int, 0, gra.NumNodes)
 	gra.Hig[s] = 0
-	que.PushBack(s)
-	for que.Len() > 0 {
-		u := que.Front().Value.(int)
-		que.Remove(que.Front())
+	que = append(que, s)
+	for len(que) > 0 {
+		u := que[0]
+		que = que[1:]
 		for _, i := range gra.Gra[u] {
 			v, c := gra.Edges[i].To, gra.Edges[i].Cap
 			if c > 0 && gra.Hig[v] == -1 {
@@ -24,7 +23,7 @@ func buildLevelGraph(gra *graph.FlowGraph, s, t int) bool {
 				if v == t {
 					return true
 				}
-				que.PushBack(v)
+				que = append(que, v)
 			}
 		}
 	}
