@@ -1,7 +1,8 @@
 package graph
 
 type edge struct {
-	To, Cap int
+	To  int
+	Cap int64
 }
 
 type FlowGraph struct {
@@ -28,9 +29,9 @@ func NewFlowGraph(numNodes int) *FlowGraph {
 	}
 }
 
-func (graph *FlowGraph) AddEdge(u, v, c int) {
+func (graph *FlowGraph) AddEdge(u, v int, c int64) {
 	graph.Gra[u] = append(graph.Gra[u], len(graph.Edges))
 	graph.Edges = append(graph.Edges, edge{v, c})
 	graph.Gra[v] = append(graph.Gra[v], len(graph.Edges))
-	graph.Edges = append(graph.Edges, edge{u, 0})
+	graph.Edges = append(graph.Edges, edge{u, int64(0)})
 }
