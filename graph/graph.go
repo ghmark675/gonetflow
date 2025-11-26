@@ -28,7 +28,7 @@ func NewFlowGraph(nodenum int) *FlowGraph {
 	}
 }
 
-func (graph *FlowGraph) AddEdge(u int, v int, c int) {
+func (graph *FlowGraph) AddEdge(u, v, c int) {
 	graph.Gra[u] = append(graph.Gra[u], len(graph.Edges))
 	graph.Edges = append(graph.Edges, edge{v, c})
 	graph.Gra[v] = append(graph.Gra[v], len(graph.Edges))
