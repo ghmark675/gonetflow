@@ -4,14 +4,14 @@ type edge struct {
 	To, Cap int
 }
 
-type Graph struct {
+type FlowGraph struct {
 	Nodenum  int
 	Edges    []edge
 	Gra      [][]int
 	Cur, Hig []int
 }
 
-func NewGraph(nodenum int) *Graph {
+func NewFlowGraph(nodenum int) *FlowGraph {
 	if nodenum < 0 {
 		return nil
 	}
@@ -19,7 +19,7 @@ func NewGraph(nodenum int) *Graph {
 	for i := range adj {
 		adj[i] = make([]int, 0)
 	}
-	return &Graph{
+	return &FlowGraph{
 		Nodenum: nodenum,
 		Edges:   make([]edge, 0),
 		Gra:     adj,
@@ -28,7 +28,7 @@ func NewGraph(nodenum int) *Graph {
 	}
 }
 
-func (graph *Graph) AddEdge(u int, v int, c int) {
+func (graph *FlowGraph) AddEdge(u int, v int, c int) {
 	graph.Gra[u] = append(graph.Gra[u], len(graph.Edges))
 	graph.Edges = append(graph.Edges, edge{v, c})
 	graph.Gra[v] = append(graph.Gra[v], len(graph.Edges))

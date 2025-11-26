@@ -7,7 +7,7 @@ import (
 	"github.com/ghmark675/gonetflow/graph"
 )
 
-func buildLevelGraph(gra *graph.Graph, s, t int) bool {
+func buildLevelGraph(gra *graph.FlowGraph, s, t int) bool {
 	for i := range gra.Hig {
 		gra.Hig[i] = -1
 	}
@@ -31,7 +31,7 @@ func buildLevelGraph(gra *graph.Graph, s, t int) bool {
 	return false
 }
 
-func findAugmentingPath(gra *graph.Graph, u, t, f int) int {
+func findAugmentingPath(gra *graph.FlowGraph, u, t, f int) int {
 	if u == t {
 		return f
 	}
@@ -54,7 +54,7 @@ func findAugmentingPath(gra *graph.Graph, u, t, f int) int {
 	return f - r
 }
 
-func Dinic(gra *graph.Graph, s, t int) int {
+func Dinic(gra *graph.FlowGraph, s, t int) int {
 	ans := 0
 	for buildLevelGraph(gra, s, t) {
 		gra.Cur = make([]int, gra.Nodenum)
