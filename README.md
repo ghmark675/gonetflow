@@ -8,8 +8,14 @@
 
   * **Algorithm Support:** Dinic's Algorithm for Maximum Flow.
   * **Performance:** Generally fast on all graphs, and achieves high performance on unit capacity networks (like Bipartite Matching).
-  * **Installation:** `go get github.com/ghmark675/gonetflow`
-  * **Requirement:** Go 1.21 or later.
+
+## Installation
+
+`go get github.com/ghmark675/gonetflow`
+
+## Requirement
+
+Go 1.21 or later.
 
 ## ⚙️ API Definitions
 
